@@ -39,4 +39,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - run: pnpm test
+      - name: pnpm test
+      - uses: koenhagen/measure-energy-action@v0.16
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          run: pnpm test
