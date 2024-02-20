@@ -1,8 +1,7 @@
 name: Test
 
 on:
-  pull_request:
-    branches: ["*"]
+  push:
 
 jobs:
   test:
@@ -40,7 +39,7 @@ jobs:
         run: pnpm install
 
       - name: pnpm test
-        uses: koenhagen/measure-energy-action@v0.16
+        uses: koenhagen/measure-energy-action@v0.33
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           run: pnpm test
