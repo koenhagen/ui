@@ -1,13 +1,12 @@
 name: Test
 
 on:
-  pull_request:
-    branches: ["*"]
+  push:
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    name: Test
+    name: pnpm test
     steps:
       - uses: actions/checkout@v3
         with:
@@ -16,7 +15,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
       - uses: pnpm/action-setup@v2.2.4
         name: Install pnpm
@@ -39,4 +38,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - run: pnpm test
+      - name: pnpm test
+        uses: koenhagen/measure-energy-action@v0.33
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          run: pnpm test
+          count: 100
